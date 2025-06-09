@@ -4,23 +4,24 @@ local packages = script.Parent.roblox_packages;
 local Dialogue = require(packages.Dialogue);
 local DialogueMakerTypes = require(packages.DialogueMakerTypes);
 
+type Dialogue = DialogueMakerTypes.Dialogue;
 type DialogueConstructorProperties = DialogueMakerTypes.DialogueConstructorProperties;
+type Effect = DialogueMakerTypes.Effect;
+type Page = DialogueMakerTypes.Page;
+type DialogueConstructorContent = DialogueMakerTypes.DialogueConstructorContent;
+type DialogueConstructorChildren = DialogueMakerTypes.DialogueConstructorChildren;
 
 local Response = {}
 
-function Response.new(properties: DialogueConstructorProperties)
+function Response.new(content: DialogueConstructorContent, properties: DialogueConstructorProperties?, children: DialogueConstructorChildren?)
 
-  return Dialogue.new({
+  return Dialogue.new(content, {
     type = "Response" :: "Response";
-    children = properties.children;
-    getChildren = properties.getChildren;
-    content = properties.content;
-    getContent = properties.getContent;
-    settings = properties.settings;
-    runInitializationAction = properties.runInitializationAction;
-    runCompletionAction = properties.runCompletionAction;
-    verifyCondition = properties.verifyCondition;
-  });
+    settings = if properties then properties.settings else nil;
+    runInitializationAction = if properties then properties.runInitializationAction else nil;
+    runCompletionAction = if properties then properties.runCompletionAction else nil;
+    verifyCondition = if properties then properties.verifyCondition else nil;
+  }, children);
 
 end;
 
