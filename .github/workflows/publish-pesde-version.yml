@@ -27,3 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           pesde install
+
+      - name: Publish to pesde registry
+        run: |
+          pesde publish -y
